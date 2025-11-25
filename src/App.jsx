@@ -26,7 +26,7 @@ function App() {
   const [guessedLetters, setGuessedLetters] = useState([]);
   const [wrongLetters, setWrongLetters] = useState([]);
   const [guesses, setGuesses] = useState(guessesQty);
-  const [score, setScore] = useState(50);
+  const [score, setScore] = useState(0);
 
   const pickWordAndCategory = useCallback(() => {
     const categories = Object.keys(words);
@@ -104,7 +104,10 @@ function App() {
   useEffect(() => {
     const uniqueLetters = [...new Set(letters)];
 
-    if (guessedLetters.length === uniqueLetters.length) {
+    if (
+      uniqueLetters.length > 0 &&
+      guessedLetters.length === uniqueLetters.length
+    ) {
       setScore((actualScore) => (actualScore += 100));
 
       startGame();
